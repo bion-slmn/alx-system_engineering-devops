@@ -1,2 +1,2 @@
 #!/bin/bash
-ls | tr -cs [:alnum:] '\n' | uniq -u | sort | tr -cs [:alnum] '\n'
+sort | uniq -u
