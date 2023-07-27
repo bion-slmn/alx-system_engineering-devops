@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# displaying the content of current directory
+
+for file in *;
+do
+	secondfield=$(echo "$file" | cut -d "-" -f 2)
+	echo "$secondfield"
+done
