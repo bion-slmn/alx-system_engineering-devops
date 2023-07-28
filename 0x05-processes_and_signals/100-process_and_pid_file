@@ -19,6 +19,6 @@ trap "delet" SIGQUIT
 
 while true; do
     echo "To infinity and beyond"
-    sleep 2
+    #sleep 2
 done
 
