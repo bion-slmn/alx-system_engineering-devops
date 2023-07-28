@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#kill an infinite lopp using pkill
+
+pkill -9 -f 7-highlander
