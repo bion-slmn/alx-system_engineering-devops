@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# this script createsa file and traps the SIgINt and SIGTERM 
+
+#!/bin/bash
+
+function delet() {
+    rm /var/run/holbertonscript.pid
+    exit
+}
+
+
+# Write the process ID to the PID file
+echo $$ > /var/run/holbertonscript.pid
+
+# Set up signal handlers
+trap "echo I hate the kill command; delet" SIGTERM
+trap "echo Y U no love me?!; exit" SIGINT
+trap "delet" SIGQUIT
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
+
