@@ -1,1 +1,1 @@
-This is project is about web infrastructure and designing them
+This is project is about web infrastructure and designing them 
