@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # this script comment to a remote server
-
-ssh add ~/.ssh/school
+eval $(ssh-agent)
+ssh-add ~/.ssh/school
 ssh ubuntu@54.89.179.242
