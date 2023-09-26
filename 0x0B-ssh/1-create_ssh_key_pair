@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# this script creates a SSH key pair, private key must be school, passphrase betty
+ssh-keygen -b 4096 -f school -P betty

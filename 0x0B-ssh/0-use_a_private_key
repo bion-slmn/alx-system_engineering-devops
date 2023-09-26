@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# this script comment to a remote server
+ssh -i ~/.ssh/school ubuntu@54.89.179.242

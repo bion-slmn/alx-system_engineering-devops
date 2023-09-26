@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Installs Nginx 
+# set the default to hello world
+
+apt-get update
+apt-get install -y nginx
+
+mkdir /etc/nginx/html
+touch /etc/nginx/html/index.html
+touch /etc/nginx/html/custom_404.html
+
+# adding content
+echo "Hello World!" > /etc/nginx/html/index.html
+echo "Ceci n'est pas une page" > /etc/nginx/html/custom_404.html
+
+# setting to listen to port 80
+printf %s "server {
+     listen      80 default_server;
+     listen      [::]:80 default_server;
+     root        /etc/nginx/html;
+     index       index.html index.htm;
+
+     location /redirect_me {
+	return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+	}
+     
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+	root /etc/nginx/html;
+	internal;
+	}
+}
+" > /etc/nginx/sites-available/default
+
+
+service nginx restart 
