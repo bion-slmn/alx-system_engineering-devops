@@ -1,25 +1,39 @@
 # installing ngnix with the latest
-class{'nginx':
-    manage_repo    => 'true',
-    package_source => 'nginx-mainline',
+
+package { 'nginx':
+  ensure => 'installed',
 }
 
-file {'/etc/nginx/html/index.html':
-        ensure  => 'present',
-        content => 'Hello World!',
+file { '/etc/nginx/html':
+  ensure => 'directory',
 }
 
-nginx::resource::server {'default_server':
-        listen port    => '80',
-        listen_options => ['default_server'],
-        server_name    => '_',
-        www_root       => '/etc/nginx/html/index.html';
-        index_files    => ['index.html', 'index.htm'],
+file { '/etc/nginx/html/index.html':
+  ensure  => 'present',
+  content => 'Hello World!',
 }
 
-nginx::resource::location{'redirect_me':
-        location            => '/redirect_me',
-        location_cfg_append => {
-        'return' => '301 https://www.youtube.com/watch?v=QH2-TGUlwu4',
+file { '/etc/nginx/sites-available/default':
+        ensure => 'present',
+        content => 'server {
+     listen      80 default_server;
+     listen      [::]:80 default_server;
+     root        /etc/nginx/html;
+     index       index.html index.htm;
+
+     location /redirect_me {
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        }
+
+    error_page 404 /custom_404.html;
+    location = /custom_404.html {
+        root /etc/nginx/html;
+        internal;
+        }
+}',
 }
+
+service { 'nginx':
+  ensure    => 'running',
+  enable    => true,
 }
