@@ -2,7 +2,7 @@
 # Installs Nginx 
 # set the default to hello world
 
-apt-get update
+apt-get -y update
 apt-get install -y nginx
 
 mkdir /etc/nginx/html
