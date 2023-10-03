@@ -4,34 +4,13 @@ package { 'nginx':
   ensure => 'installed',
 }
 
-file { '/etc/nginx/html':
-  ensure => 'directory',
-}
-
-file { '/etc/nginx/html/index.html':
+file { 'adding header content to server':
+  path    => '/etc/nginx/sites-available/default',
   ensure  => 'present',
-  content => 'Hello World!',
 }
 
-file { '/etc/nginx/sites-available/default':
-        ensure => 'present',
-        content => 'server {
-     listen      80 default_server;
-     listen      [::]:80 default_server;
-     root        /etc/nginx/html;
-     index       index.html index.htm;
-     add_header  X-Served-By $HOSTNAME
-
-     location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-        }
-
-    error_page 404 /custom_404.html;
-    location = /custom_404.html {
-        root /etc/nginx/html;
-        internal;
-        }
-}',
+exec {'execute the command':
+  command => '/bin/sed -i "6i \\\tadd_header X-Served-By $(hostname);" /etc/nginx/sites-available/default',
 }
 
 service { 'nginx':
