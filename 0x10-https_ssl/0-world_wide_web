@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# this displays information of the DNS
+
+domain="$1"
+sub_d="$2"
+
+if [ ! "$domain" ]
+then
+	return
+fi
+
+if [ ! "$sub_d" ]
+then
+	sub_domain=('www' 'lb-01' 'web-01' 'web-02')
+	for n in "${sub_domain[@]}";
+	do
+		record=$(dig "$n".thebion.tech +noall +answer | awk '{print $4}' | tail -1)
+		ip_add=$(dig "$n".thebion.tech +short) 
+		echo "The subdomain $n is a $record record and points to $ip_add"
+	done
+else
+	record=$(dig "$sub_d".thebion.tech +noall +answer | awk '{print $4}' | tail -1)
+        ip_add=$(dig "$sub_d".thebion.tech +short)
+        echo "The subdomain $sub_d is a $record record and points to $ip_add"
+fi
