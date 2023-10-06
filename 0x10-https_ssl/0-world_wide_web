@@ -16,10 +16,10 @@ then
 	do
 		record=$(dig "$n".thebion.tech +noall +answer | awk '{print $4}' | tail -1)
 		ip_add=$(dig "$n".thebion.tech +short) 
-		echo "The subdomain $n is a $record record and points to $ip_add"
+		echo "The subdomain $n is a $record record and points to  $ip_add"
 	done
 else
 	record=$(dig "$sub_d".thebion.tech +noall +answer | awk '{print $4}' | tail -1)
         ip_add=$(dig "$sub_d".thebion.tech +short)
-        echo "The subdomain $sub_d is a $record record and points to $ip_add"
+        echo "The subdomain $sub_d is a $record record and points to  $ip_add"
 fi
