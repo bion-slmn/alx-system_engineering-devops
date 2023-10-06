@@ -11,7 +11,7 @@ fi
 
 if [ ! "$sub_d" ]
 then
-	sub_domain=('www' 'lb-01' 'web-01' 'web-02')
+	sub_domain=('www''lb-01''web-01''web-02')
 	for n in "${sub_domain[@]}";
 	do
 		record=$(dig "$n".thebion.tech +noall +answer | awk '{print $4}' | tail -1)
