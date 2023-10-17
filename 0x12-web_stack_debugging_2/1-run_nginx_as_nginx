@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# running as ngnix user and changing listing ports to 8080
+sed -i "s/#user www-data;/user ngninx;/" /etc/nginx/nginx.conf
+sed -i "s/80/80808/" /etc/nginx/sites-available/default
+chmod 644 /etc/nginx/nginx.conf
+pkill apache2
+sudo -u nginx service nginx start
