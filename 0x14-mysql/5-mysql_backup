@@ -3,9 +3,6 @@
 
 # backing up all databases
 mysqldump -u root -p "$1" --all-databases > backup.sql
-day=$(date +%d)
-month=$(date +%m)
-year=$(date +%Y)
 
 # create an archive
-tar -cvzf "$day-$month-$year".tar.gz  backup.sql
+tar -cvzf "$(date +%d-%m-%Y)".tar.gz  backup.sql
