@@ -20,7 +20,7 @@ if __name__ == '__main__':
     task_completd_list = list(task_completd)
 
     print(f'Employee {employee_name} is done with tasks\
-          ({len(task_completd_list)}/{total_task}): ')
+          ({len(task_completd_list)}/{total_task}):')
 
     for task in task_completd_list:
-        print(f'     {task.get("title")}')
+        print(f'\t {task.get("title")}')
