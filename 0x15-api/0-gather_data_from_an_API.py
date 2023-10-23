@@ -17,10 +17,10 @@ if __name__ == '__main__':
 
     task_completd = filter(lambda x: x.get("completed") is True,
                            todo_response)
-    task_completd_list = list(task_completd)
+    task_done = list(task_completd)
 
-    print(f'Employee {employee_name} is done with tasks\
-          ({len(task_completd_list)}/{total_task}):')
+    print("Employee {} is done with tasks({}/{}):"
+          .format(employee_name, len(task_done), total_task))
 
-    for task in task_completd_list:
+    for task in task_done:
         print(f'\t {task.get("title")}')
