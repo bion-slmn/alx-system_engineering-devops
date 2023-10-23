@@ -12,8 +12,8 @@ if __name__ == '__main__':
     payload = {"id": employee_ID}
     pay = {"userId": employee_ID}
 
-    user_response = requests.get(f'{url}/users/', params=payload).json()
-    todo_response = requests.get(f'{url}/todos/', params=pay).json()
+    user_response = requests.get(url + '/users/', params=payload).json()
+    todo_response = requests.get(url + '/todos/', params=pay).json()
 
     employee_name = user_response[0].get("username")
     file_name = '{}.json'.format(employee_ID)
