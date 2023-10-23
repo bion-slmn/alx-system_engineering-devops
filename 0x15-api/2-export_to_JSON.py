@@ -11,9 +11,8 @@ if __name__ == '__main__':
     url = 'https://jsonplaceholder.typicode.com'
     payload = {"id": employee_ID}
     pay = {"userId": employee_ID}
-    
-    user_response = requests.get(f'{url}/users/', params=payload).json()
 
+    user_response = requests.get(f'{url}/users/', params=payload).json()
     todo_response = requests.get(f'{url}/todos/', params=pay).json()
 
     employee_name = user_response[0].get("username")
@@ -29,5 +28,5 @@ if __name__ == '__main__':
                     for task in todo_response
                            ]
               }
-    with open(file_name, 'w', encoding='utf-8') as json_file:
+    with open(file_name, 'w') as json_file:
         json.dump(todo_dict, json_file)
