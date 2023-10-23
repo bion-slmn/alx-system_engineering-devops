@@ -12,16 +12,21 @@ if __name__ == '__main__':
     payload = {"id": employee_ID}
     pay = {"userId": employee_ID}
 
-    user_response = requests.get(url + '/users/', params=payload).json()
-    todo_response = requests.get(url + '/todos/', params=pay).json()
+    user_response = requests.get(url + '/users', params=payload).json()
+    todos = requests.get(url + '/todos', params=pay).json()
 
     employee_name = user_response[0].get("username")
     file_name = '{}.json'.format(employee_ID)
 
-    todo_dict = {employee_ID: [{
+    '''todo_dict = {employee_ID: [{
                                 "task": task.get("title"),
                                 "completed": task.get("completed"),
                                 "username": employee_name
-                    }for task in todo_response]}
+                    }for task in todo_response]}i'''
+
     with open(file_name, 'w') as json_file:
-        json.dump(todo_dict, json_file)
+        json.dump({employee_ID: [{
+                "task": t.get("title"),
+                "completed": t.get("completed"),
+                "username": employee_name
+            } for t in todos]}, json_file)
