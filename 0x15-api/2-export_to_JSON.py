@@ -18,15 +18,11 @@ if __name__ == '__main__':
     employee_name = user_response[0].get("username")
     file_name = '{}.json'.format(employee_ID)
 
-    '''todo_dict = {employee_ID: [{
+    todo_dict = {employee_ID: [{
                                 "task": task.get("title"),
                                 "completed": task.get("completed"),
                                 "username": employee_name
-                    }for task in todo_response]}i'''
+                    }for task in todos]}
 
     with open(file_name, 'w') as json_file:
-        json.dump({employee_ID: [{
-                "task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": employee_name
-            } for t in todos]}, json_file)
+        json.dump(todo_dict, json_file)
