@@ -20,9 +20,10 @@ def count_words(subreddit, word_list, after=None, count={}):
     if response.status_code == 404:
         return
     results = response.json()
+    # print(response.url)
     word_list = [x.lower() for x in word_list]
 
-    if results.get('data').get("children"):
+    if results.get('data'):
         for item in results.get('data').get("children"):
             title = item.get('data').get('title')
 
@@ -31,11 +32,12 @@ def count_words(subreddit, word_list, after=None, count={}):
                 if word in word_list:
                     count[word] = count.get(word, 0) + 1
 
-    after = results.get('data').get('after')
+        after = results.get('data').get('after')
+        # print(count, after)
 
     if after is not None:
         count_words(subreddit, word_list, after, count)
     else:
         for k, v in sorted(count.items(), key=lambda x: (x[1], x[0])):
             print('{}: {}'. format(k, v))
-        return 
+        return
