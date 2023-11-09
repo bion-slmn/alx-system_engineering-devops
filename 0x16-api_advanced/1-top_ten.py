@@ -20,6 +20,6 @@ def top_ten(subreddit):
     if response.status_code == 404:
         print("None")
         return
-    results = response.json().get('data').get("children")
-    for item in results:
+    results = response.json().get('data')
+    for item in results.get('children'):
         print(item.get('data').get('title'))
