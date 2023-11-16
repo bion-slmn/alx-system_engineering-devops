@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# gracefuly close all running gunicorn workers one by one and reloading new ones
+# avoiding downtime
+
+pgrep gunicorn | xargs -I % kill -HUP %
