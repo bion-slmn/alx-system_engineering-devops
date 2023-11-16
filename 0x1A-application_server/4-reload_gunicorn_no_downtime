@@ -2,4 +2,4 @@
 # gracefuly close all running gunicorn workers one by one and reloading new ones
 # avoiding downtime
 
-pgrep gunicorn | xargs -I % kill -HUP %
+ps aux | grep gunicorn | awk '{ print $2 }'| xargs -I % kill -HUP %
