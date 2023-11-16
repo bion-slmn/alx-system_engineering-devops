@@ -1,0 +1,36 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    add_header X-Served-By $HOSTNAME;
+    root   /var/www/html;
+    index  index.html index.htm;
+    server_name  thebion.tech;
+
+    # alias substitutes '/hbnb_static' with '/data/web_static/current/...'
+    location /hbnb_static {
+        alias /data/web_static/current;
+        index index.html index.htm;
+    }
+    # redirects permanently
+    location /redirect_me {
+        return 301 http://cuberule.com/;
+    }
+  
+    # this send the requests to localhost gunicorn listening on port 5000
+    location /airbnb-onepage/ {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5000;
+    }
+
+    # forward the request to localhost on 5001
+    location ~* /airbnb-dynamic/number_odd_or_even/\d+ {
+    	include proxy_params;
+    	proxy_pass http://127.0.0.1:5001;
+    }
+
+    # this send the requests to localhost gunicorn listening on port 5002
+   location /api/ {
+    include proxy_params;
+    proxy_pass http://127.0.0.1:5002;
+    }
+}
